@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author mmaye
+ *
+ */
+module CriticalThinking {
+}

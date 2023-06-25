@@ -1,0 +1,10 @@
+package criticalThinking;
+
+public class CriticalThinking_Module_Three {
+
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+
+	}
+
+}

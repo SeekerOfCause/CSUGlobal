@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/nav_second_fragment"
+            android:title="Eiffel Tower" />
+        <item
+            android:id="@+id/nav_third_fragment"
+            android:title="Tower Bridge" />
+        <item
+            android:id="@+id/nav_fourth_fragment"
+            android:title="Brooklyn Bridge" />
+
+</menu>

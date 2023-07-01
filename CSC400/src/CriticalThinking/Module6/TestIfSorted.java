@@ -12,7 +12,7 @@ public class TestIfSorted {
 	    	}
 	    	
 	    	if (ordered) {
-	    		return "The array is sorted";
+	    		return "The array is sorted in ascending order";
 	    	}
 	    	else {
 	    		return "The array is not sorted";

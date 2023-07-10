@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_theme_light_surface">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        style="@android:style/Widget.Material.Light.ScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_theme_light_surface"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/md_theme_light_surface"
+            android:orientation="vertical">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/md_theme_light_surface">
+
+                <TextView
+                    android:id="@+id/calcTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="96dp"
+                    android:text="@string/calculator_title"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+                    android:textColor="@color/md_theme_light_onBackground"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/purchasePriceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:text="@string/enter_house_price"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@+id/purchasePriceEntry"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/purchasePriceEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/calcTitle" />
+
+                <EditText
+                    android:id="@+id/purchasePriceEntry"
+                    style="@style/TextAppearance.Material3.SearchBar"
+                    android:layout_width="376dp"
+                    android:layout_height="52dp"
+                    android:ems="10"
+                    android:hint="@string/home_price_prompt"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    android:textColorHint="@color/md_theme_light_tertiary"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/purchasePriceTitle"
+                    tools:ignore="LabelFor" />
+
+                <EditText
+                    android:id="@+id/downPaymentEntry"
+                    style="le/TextAppearance.Material3.SearchBar"
+                    android:layout_width="376dp"
+                    android:layout_height="52dp"
+                    android:ems="10"
+                    android:hint="@string/down_payment_prompt"
+                    android:importantForAutofill="no"
+                    android:inputType="number|numberDecimal"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    android:textColorHint="@color/md_theme_light_tertiary"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/downPaymentTitle" />
+
+                <TextView
+                    android:id="@+id/downPaymentTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="88dp"
+                    android:text="@string/enter_down_payment"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/downPaymentEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/purchasePriceTitle" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="92dp"
+                    android:text="@string/interest_rate_entry"
+                    android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/downPaymentTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/downPaymentTitle" />
+
+                <EditText
+                    android:id="@+id/interestEntry"
+                    android:layout_width="376sp"
+                    android:layout_height="52sp"
+                    android:ems="10"
+                    android:hint="@string/interest_rate_prompt"
+                    android:importantForAutofill="no"
+                    android:inputType="number|numberDecimal"
+                    android:textAppearance="@style/TextAppearance.Material3.SearchBar"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    android:textColorHint="@color/md_theme_light_tertiary"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/downPaymentEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+                <TextView
+                    android:id="@+id/lengthOptionSelected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="50dp"
+                    android:textColor="@color/md_theme_light_onSurfaceVariant"
+                    app:layout_constraintStart_toEndOf="@+id/lengthOptionButton"
+                    app:layout_constraintTop_toBottomOf="@+id/lengthOptionTitle" />
+
+                <TextView
+                    android:id="@+id/lengthOptionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:text="@string/mortgage_option_title"
+                    android:textColor="@color/md_theme_light_inversePrimary"
+                    android:textSize="12sp"
+                    android:textStyle="bold|italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/interestEntry"
+                    app:layout_constraintTop_toBottomOf="@+id/interestEntry" />
+
+                <Button
+                    android:id="@+id/calcClearButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/calc_button_clear"
+                    app:layout_constraintEnd_toEndOf="@+id/interestEntry"
+                    app:layout_constraintHorizontal_bias="0.754"
+                    app:layout_constraintStart_toStartOf="@+id/interestEntry"
+                    app:layout_constraintTop_toTopOf="@+id/calcCalculateButton" />
+
+                <Button
+                    android:id="@+id/calcCalculateButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:text="@string/calc_button_calculate"
+                    app:layout_constraintEnd_toStartOf="@+id/calcClearButton"
+                    app:layout_constraintHorizontal_bias="0.683"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mortgageLengthSeek" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/mortgageLengthSeek"
+                    android:layout_width="344sp"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="24dp"
+                    android:hapticFeedbackEnabled="true"
+                    android:max="30"
+                    android:scrollbarSize="8sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lengthOptionButton"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/lengthOptionButton"
+                    android:layout_width="89dp"
+                    android:layout_height="84dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="16dp"
+                    android:checked="false"
+                    android:gravity="center_vertical"
+                    android:textAllCaps="false"
+                    android:textOff="@string/buttonSetting"
+                    android:textOn="@string/buttonSetting"
+                    app:layout_constraintStart_toStartOf="@+id/lengthOptionTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/lengthOptionTitle" />
+
+                <TableLayout
+                    android:id="@+id/resultTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:background="@color/md_theme_light_surface"
+                    android:foregroundTint="#7AE8E8E8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/calcCalculateButton">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/costsTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/md_theme_light_onSurface" />
+
+                        <Space
+                            android:layout_width="14sp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tenYearTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/md_theme_light_onSurface" />
+
+                        <Space
+                            android:layout_width="14sp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/twentyYearTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/md_theme_light_onSurface" />
+
+                        <Space
+                            android:layout_width="14sp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/thirtyYearTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/md_theme_light_onSurface" />
+
+                    </TableRow>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="10sp" />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/totalCostTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/md_theme_light_onSurface" />
+
+                        <Space
+                            android:layout_width="14sp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/tenYearTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/md_theme_light_onSurface"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="14sp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/twentyYearTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textColor="@color/md_theme_light_onSurface"
+                            android:textSize="16sp" />
+
+                        <Space
+                            android:layout_width="14sp"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/thirtyYearTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:textSize="16sp"
+                            android:textColor="@color/md_theme_light_onSurface"
+                            />
+
+                    </TableRow>
+
+
+                </TableLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/chartView"
+                    android:layout_width="380sp"
+                    android:layout_height="1250sp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/resultTable">
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="24sp" />
+
+                    <TextView
+                        android:id="@+id/chart1text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="18sp" />
+
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="350sp"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="48sp" />
+
+                    <TextView
+                        android:id="@+id/chart2title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="18sp" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart2"
+                        android:layout_width="match_parent"
+                        android:layout_height="350sp"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="48sp" />
+
+                    <TextView
+                        android:id="@+id/chart3text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textSize="18sp" />
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/chart3"
+                        android:layout_width="match_parent"
+                        android:layout_height="350sp"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

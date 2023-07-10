@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Mortgage Calculator</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Mortgage Calculator</string>
+    <string name="nav_header_subtitle">See your future payments</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="option2">Calculator</string>
+    <string name="option3">Payment Chart</string>
+    <string name="calculator_title">Welcome to the Mortgage Calculator</string>
+    <string name="enter_house_price">Home Purchase Price</string>
+    <string name="home_price_prompt">Enter the full purchase price of your home</string>
+    <string name="enter_down_payment">Down Payment</string>
+    <string name="down_payment_prompt">Enter your down payment amount</string>
+    <string name="interest_rate_entry">Interest Rate</string>
+    <string name="interest_rate_prompt">Enter your interest rate</string>
+    <string name="calc_button_clear">  CLEAR  </string>
+    <string name="calc_button_calculate">CALCULATE</string>
+    <string name="buttonSetting" />
+    <string name="mortgage_option_title">OPTIONAL: Manual Mortgage Length Entry</string>
+    <string name="option_checked">Select a length to calculate final costs</string>
+    <string name="option_not_checked">Calculating the 10, 20, and 30 year costs</string>
+    <string name="monthlyPayment">"Monthly Payment: "</string>
+    <string name="monthlyInterest">"Monthly Interest: "</string>
+    <string name="monthlyPrincipal">Monthly Principal</string>
+    <string name="yearTitleString">%d years</string>
+    <string name="lengthTitle">Length: </string>
+</resources>

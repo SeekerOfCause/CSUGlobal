@@ -1,0 +1,12 @@
+@startuml
+start
+:Product Backlog;
+:Planning Meeting;
+repeat
+while (Sprint) is (Active)
+  :Development;
+  :Testing;
+  :Review and Feedback;
+ (Next Sprint?)
+
+@enduml

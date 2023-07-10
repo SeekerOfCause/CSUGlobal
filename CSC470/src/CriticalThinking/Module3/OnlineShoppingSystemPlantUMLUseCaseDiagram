@@ -1,0 +1,113 @@
+@startuml OnlineShoppingUseCaseDiagram
+
+skinparam usecase {
+BackgroundColor DarkSeaGreen
+BorderColor DarkSlateGray
+BackgroundColor<< Main >> YellowGreen
+BorderColor<< Main >> YellowGreen
+ArrowColor Olive
+ActorBorderColor black
+ActorFontName Courier
+ActorBackgroundColor<< Human >> Gold
+}
+
+skinparam packageStyle rectangle
+
+
+actor Customer as USER #green;line:green;line.bold;
+actor Guest as GUEST #blue;line:blue;line.bold;
+actor Admin as ADMIN #red;line:red;line.bold;
+
+
+
+
+rectangle "Online Shopping System" {
+
+
+
+
+rectangle "Registered User" {
+
+
+    
+ 
+    
+    Rectangle "Home Page" {
+    
+       USER -- (Search Products)#line:green;line.bold;text:green
+    USER -- (View Cart)#line:green;line.bold;text:green
+    
+    }
+
+    
+    
+    
+Rectangle "Registered User Cart" {
+(View Cart) -- (Proceed to Checkout)#line:purple;line.bold;text:purple
+    (View Cart) -- (Remove from Cart)#line:purple;line.bold;text:purple
+    (Proceed to Checkout) -- (Make Payment)#line:purple;line.bold;text:purple
+}
+    
+Rectangle "Personal User Functions" {
+    USER -- (Track Order)#line:green;line.bold;text:green
+    USER -- (View Orders)#line:green;line.bold;text:green
+    USER -- (Update Profile)#line:green;line.bold;text:green
+    (View Orders) -- (Cancel Order)#line:purple;line.bold;text:purple
+}
+    
+  
+    
+    rectangle "Product Details" {
+    (Search Products) -- (View Product Details)#line:purple;line.bold;text:purple
+    (View Product Details) -- (Add to Cart)#line:purple;line.bold;text:purple
+    }
+    }
+    
+
+    
+    
+
+
+Rectangle "Login Functions" {
+USER -- (Login)#line:green;line.bold;text:green
+GUEST -- (Login)#line:blue;line.bold;text:blue
+}
+
+Rectangle "Guest Home Page" {
+GUEST -- (GUEST View Product Details) #line:blue;line.bold;text:blue
+GUEST -- (GUEST Search Products) #line:blue;line.bold;text:blue
+
+Rectangle "Register Functions" {
+GUEST -- (Register Account) #line:blue;line.bold;text:blue
+(GUEST View Product Details) -- (Register Account)#line:purple;line.bold;text:purple
+(GUEST Search Products) -- (Register Account)#line:purple;line.bold;text:purple
+}
+}
+    
+    
+
+}
+
+    rectangle "Admin Tools" {
+    ADMIN -- (Manager Login)#line:red;line.bold;text:red
+    ADMIN -- (Manage Products)#line:red;line.bold;text:red
+    ADMIN -- (Manage Orders)#line:red;line.bold;text:red
+    
+    (Manage Orders) -- (Update Customer)#line:purple;line.bold;text:purple
+    (Update Customer) -- USER #line:purple;line.bold;text:purple
+    (Update Store) -- "Online Shopping System"#line:purple;line.bold;text:purple
+    (Manage Products) -- (Update Product)#line:purple;line.bold;text:purple
+    (Manage Products)-- (Remove Product)#line:purple;line.bold;text:purple
+    (Manage Products) -- (Add product)#line:purple;line.bold;text:purple
+    (Remove Product) -- (Update Store)#line:purple;line.bold;text:purple
+    (Update Product) -- (Update Store)#line:purple;line.bold;text:purple
+    (Add product) -- (Update Store)#line:purple;line.bold;text:purple
+    }
+
+
+(Add to Cart) -[hidden]-> (Login) : <<extends>>
+(Proceed to Checkout) -[hidden]-> (Login) : <<extends>>
+(Proceed to Checkout) -[hidden]-> (View Cart) : <<extends>>
+(Make Payment) -[hidden]-> (Proceed to Checkout) : <<extends>>
+
+@enduml

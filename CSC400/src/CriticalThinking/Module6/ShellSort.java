@@ -6,7 +6,10 @@ public class ShellSort {
 	
 	//Initialize int arrays with random arrays
 
+<<<<<<< HEAD
 	@SuppressWarnings("unchecked")
+=======
+>>>>>>> cbee1a7 (Reformatting directory)
 	public static ArrayList<Object> shellSort(ArrayList<?> array) {
 	    int n = array.size();
 	    ArrayList<Object> sortedArray = new ArrayList<>(array); // Create a new ArrayList with the same elements

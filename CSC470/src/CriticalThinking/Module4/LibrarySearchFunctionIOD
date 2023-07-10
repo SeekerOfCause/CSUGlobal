@@ -1,0 +1,49 @@
+@startuml
+
+start
+<<<<<<< HEAD
+partition LibrarySystem{
+partition Search Page {
+=======
+partition Website {
+>>>>>>> 8e5f051 (backup)
+repeat
+:Get user input;
+:Validate search request;
+repeat while (Valid search request?) is (no)
+-> yes;
+
+: Display search page to user;
+-> Send search request;
+}
+  partition Library Data Base {
+
+  if (Book available at current location?) then (yes)
+    :In Stock, provide location information;
+  else (no)
+    if (Book available at another location?) then (yes)
+      :Not in stock, available at another location;
+    else (no)
+      :Not in stock;
+    endif
+    
+  endif
+  }
+-> Send results;
+	:Results Recieved 
+
+<<<<<<< HEAD
+
+=======
+Results Recieved --> Website : Display search page to user;
+>>>>>>> 8e5f051 (backup)
+
+-> update user
+:Display search page to user;
+
+<<<<<<< HEAD
+}
+
+=======
+>>>>>>> 8e5f051 (backup)
+@enduml

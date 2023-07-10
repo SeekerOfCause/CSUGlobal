@@ -51,9 +51,17 @@ public class ScopeMinimizationDiscussion {
 	        this.salary = salary;
 	    }
 
-	    // Getters and setters for name, position, and salary
-
-	    // ...
+	    public double getSalary() {
+	    	return this.salary;
+	    }
+	    
+	    public String getName() {
+	    	return this.name;
+	    }
+	    
+	    public String getPosition() {
+	    	return this.position;
+	    }
 	}
 
 }

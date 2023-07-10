@@ -24,10 +24,15 @@ public class ArrayEntry extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+<<<<<<< HEAD
 
         inputField = new TextField();
         inputField.setPromptText("Enter an array of element separated by a ','");
         
+=======
+        // Create UI components
+        inputField = new TextField();
+>>>>>>> cbee1a7 (Reformatting directory)
         processButton = new Button("Process");
         testSortedButton = new Button("Test Sorted");
         testUnsortedButton = new Button("Test Unsorted");
@@ -39,6 +44,10 @@ public class ArrayEntry extends Application {
         isSortedResult = new TextArea();
         isSortedResult.setEditable(false);
 
+<<<<<<< HEAD
+=======
+        // Process button event handler
+>>>>>>> cbee1a7 (Reformatting directory)
         processButton.setOnAction(event -> processInput());
         testSortedButton.setOnAction(event -> testSorted());
         testUnsortedButton.setOnAction(event -> testUnsorted());
@@ -46,10 +55,15 @@ public class ArrayEntry extends Application {
         HBox tests = new HBox(5);
         tests.getChildren().addAll(testSortedButton, testUnsortedButton);
 
+<<<<<<< HEAD
+=======
+        // Layout setup
+>>>>>>> cbee1a7 (Reformatting directory)
         VBox root = new VBox(10);
         root.setPadding(new Insets(10));
         root.getChildren().addAll(inputField, processButton, sortedResult, isSortedResult, tests);
 
+<<<<<<< HEAD
         Scene scene = new Scene(root, 400, 300);
         
         
@@ -61,6 +75,15 @@ public class ArrayEntry extends Application {
         processButton.requestFocus();
         inputField.setVisible(true);
         
+=======
+        // Scene setup
+        Scene scene = new Scene(root, 400, 300);
+
+        // Stage setup
+        primaryStage.setTitle("Array Input GUI");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+>>>>>>> cbee1a7 (Reformatting directory)
     }
     
     private void processInput() {

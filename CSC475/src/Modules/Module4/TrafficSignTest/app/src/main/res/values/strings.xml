@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Traffic Sign Test</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">Menu</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="text_welcome">Welcome to the Traffic Sign test</string>
+    <string name="username_input">Enter your name:</string>
+    <string name="begin_test">BEGIN TEST</string>
+    <string name="question_1">Question 1</string>
+    <string name="question_2">Question 2</string>
+    <string name="question_3">Question 3</string>
+    <string name="question_4">Question 4</string>
+    <string name="question_5">Question 5</string>
+    <string name="question_6">Question 6</string>
+    <string name="question_7">Question 7</string>
+    <string name="question_8">Question 8</string>
+    <string name="question_9">Question 9</string>
+    <string name="submit_answer">Submit</string>
+    <string name="test_end_title">All done!!</string>
+    <string name="test_end_score_title">Score:</string>
+    <string name="test_end_inst">Navigate to the scores page to see how you ranked agains other users!!!</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_test">Test</string>
+    <string name="menu_scores">Scores</string>
+    <string name="answer_stop_sign">Stop Sign</string>
+    <string name="answer_hov_2_plus">High Occupancy Vehicle Lane ahead</string>
+    <string name="answer_keep_right_divider">Keep right of divider</string>
+    <string name="left_lane_turn_only_plus">Left lane turn only, right lane turn optional</string>
+    <string name="no_left_or_u_turn">No left or u turns allowed</string>
+    <string name="no_left_turn">No left turns allowed</string>
+    <string name="no_parking">No Parking</string>
+    <string name="one_way">One way</string>
+    <string name="stop_sign_ahead">Stop sign ahead</string>
+
+</resources>

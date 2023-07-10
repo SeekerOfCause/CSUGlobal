@@ -1,0 +1,16 @@
+Name: Angelie
+Address: 789 What Rd.
+GPA: 3.5
+
+Name: Claudia
+Address: 456 Ok Ave.
+GPA: 3.4
+
+Name: Hunter
+Address: 987 Why Pl.
+GPA: 4.3
+
+Name: Michael
+Address: 123 Yup St.
+GPA: 3.0
+

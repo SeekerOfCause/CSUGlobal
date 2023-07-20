@@ -96,22 +96,21 @@
         android:id="@+id/welcome_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:visibility="visible" >
 
         <TextView
             android:id="@+id/text_gallery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="184dp"
             android:text="@string/text_welcome"
             android:textAlignment="center"
             android:textColor="@color/md_theme_light_onSurface"
             android:textSize="24sp"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="210dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"

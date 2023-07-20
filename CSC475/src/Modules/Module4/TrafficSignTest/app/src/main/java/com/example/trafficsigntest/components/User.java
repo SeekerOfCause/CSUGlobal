@@ -8,7 +8,6 @@ public class User {
         userName = "";
         correctAnswers = 0;
     }
-
     public User(String user, int score) {
         this.userName = user;
         this.correctAnswers = score;

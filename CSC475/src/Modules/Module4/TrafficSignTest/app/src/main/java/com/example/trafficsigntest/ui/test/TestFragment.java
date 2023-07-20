@@ -1,5 +1,6 @@
 package com.example.trafficsigntest.ui.test;
 
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.trafficsigntest.R;
 import com.example.trafficsigntest.components.Question;
 import com.example.trafficsigntest.components.User;
@@ -52,9 +52,7 @@ public class TestFragment extends Fragment {
 
         binding = FragmentTestBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         sharedPrefs = getActivity().getSharedPreferences("Users", Context.MODE_PRIVATE);
-
         final TextView textView = binding.textGallery;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
@@ -63,7 +61,6 @@ public class TestFragment extends Fragment {
         ConstraintLayout test = root.findViewById(R.id.question_layout);
         ConstraintLayout end = root.findViewById(R.id.test_end);
         Button startButton = root.findViewById(R.id.start_button);
-
 
 
         welcome.setVisibility(View.VISIBLE);
@@ -76,7 +73,6 @@ public class TestFragment extends Fragment {
 //                System.out.println("Starting Test");
 //                startTest(root);
 //            }
-
         });
 
 
@@ -271,5 +267,6 @@ public class TestFragment extends Fragment {
         RadioButton selected = v.findViewById(answers.getCheckedRadioButtonId());
         selected.setChecked(false);
         return answers.indexOfChild(selected);
+
     }
 }

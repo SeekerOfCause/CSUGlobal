@@ -10,40 +10,42 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Space;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.text.PrecomputedTextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.trafficsigntest.R;
 import com.example.trafficsigntest.components.Question;
+import com.example.trafficsigntest.components.Test;
 import com.example.trafficsigntest.components.User;
 import com.example.trafficsigntest.databinding.FragmentTestBinding;
-import com.example.trafficsigntest.helpers.UserDataManager;
-
-
-import java.util.ArrayList;
-import java.util.Random;
 
 public class TestFragment extends Fragment {
 
     private FragmentTestBinding binding;
 
     private SharedPreferences sharedPrefs;
-    private int questionNum = 0;
-
-    private final ArrayList<Integer> iArray = new ArrayList<>();
-
-    private int correct = 0;
 
     private User user;
-    private int currentQuestion = 0;
+
+    private Test test;
 
     private int userScore = 0;
+
+    private Question current = null;
+
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,166 +53,23 @@ public class TestFragment extends Fragment {
                 new ViewModelProvider(this).get(TestViewModel.class);
 
         binding = FragmentTestBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        sharedPrefs = getActivity().getSharedPreferences("Users", Context.MODE_PRIVATE);
+        root = binding.getRoot();
+
         final TextView textView = binding.textGallery;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
+        setViews(3);
 
-        ConstraintLayout welcome = root.findViewById(R.id.welcome_layout);
-        ConstraintLayout test = root.findViewById(R.id.question_layout);
-        ConstraintLayout end = root.findViewById(R.id.test_end);
-        Button startButton = root.findViewById(R.id.start_button);
+        sharedPrefs = requireActivity().getPreferences(Context.MODE_PRIVATE);
 
-
-        welcome.setVisibility(View.VISIBLE);
-        test.setVisibility(View.GONE);
-        end.setVisibility(View.GONE);
-        startButton.setOnClickListener(e -> {
-            user = createUser(root, welcome, test);
-//            System.out.println(user.getUserName() + " : " + user.verify());
-//            if (user.getUserName().compareTo("") != 0) {
-//                System.out.println("Starting Test");
-//                startTest(root);
-//            }
-        });
-
+        Button start = root.findViewById(R.id.start_button);
+        start.setOnClickListener(e -> user = getUser());
 
         return root;
     }
 
-    private void startTest(View v) {
-
-        setupQuestionTitle(v, currentQuestion);
-        setupQuestion(v);
-    }
-
-
-    private void setupQuestionTitle(View v, int i) {
-        TextView title = v.findViewById(R.id.question_title);
-
-        switch (i) {
-
-            case 1:
-                title.setText(R.string.question_2);
-                break;
-            case 2:
-                title.setText(R.string.question_3);
-                break;
-            case 3:
-                title.setText(R.string.question_4);
-                break;
-            case 4:
-                title.setText(R.string.question_5);
-                break;
-            case 5:
-                title.setText(R.string.question_6);
-                break;
-            case 6:
-                title.setText(R.string.question_7);
-                break;
-            case 7:
-                title.setText(R.string.question_8);
-                break;
-            case 8:
-                title.setText(R.string.question_9);
-                break;
-            default:
-                title.setText(R.string.question_1);
-                break;
-        }
-
-    }
-
-
-    private void setupQuestion(View v) {
-
-
-        Question question = null;
-        int randomAnswer = new Random().nextInt(4);
-        ImageView image = v.findViewById(R.id.question_image);
-        RadioButton ansOne = v.findViewById(R.id.answer_one);
-        RadioButton ansTwo = v.findViewById(R.id.answer_two);
-        RadioButton ansThree = v.findViewById(R.id.answer_three);
-        RadioButton ansFour = v.findViewById(R.id.answer_four);
-        boolean q = false;
-        while (!q) {
-            Integer randomIndex = new Random().nextInt(9);
-            if (!iArray.contains(randomIndex)) {
-                questionNum = randomIndex;
-                question = new Question(questionNum);
-                q = true;
-            }
-        }
-        image.setImageResource(question.getImage());
-        Integer[] decoys = question.getDecoys();
-        int answer = question.getAnswer();
-        System.out.println("Correct Answer: " + (randomAnswer + 1));
-
-        switch (randomAnswer) {
-            case 0:
-                ansOne.setText(answer);
-                ansTwo.setText(decoys[0]);
-                ansThree.setText(decoys[1]);
-                ansFour.setText(decoys[2]);
-                break;
-            case 1:
-                ansOne.setText(decoys[0]);
-                ansTwo.setText(answer);
-                ansThree.setText(decoys[1]);
-                ansFour.setText(decoys[2]);
-                break;
-            case 2:
-                ansOne.setText(decoys[1]);
-                ansTwo.setText(decoys[0]);
-                ansThree.setText(answer);
-                ansFour.setText(decoys[2]);
-                break;
-            case 3:
-                ansOne.setText(decoys[2]);
-                ansTwo.setText(decoys[0]);
-                ansThree.setText(decoys[1]);
-                ansFour.setText(answer);
-                break;
-            default:
-                System.out.println("ERROR on answer location");
-                break;
-
-        }
-        correct = randomAnswer;
-        setupButton(v);
-
-    }
-
-    private void setupButton(View v) {
-
-        Button submit = v.findViewById(R.id.submit_answer_button);
-
-        submit.setOnClickListener(e -> {
-            currentQuestion++;
-            int answer = getCheckedAnswer(v);
-            System.out.println("Entered Answer: " + (answer + 1));
-            if (String.valueOf(answer).compareTo(String.valueOf(correct)) == 0) {
-                userScore++;
-                System.out.println("Updating user score");
-            }
-            if (currentQuestion >= 9) {
-                ConstraintLayout test = v.findViewById(R.id.question_layout);
-                ConstraintLayout end = v.findViewById(R.id.test_end);
-
-                test.setVisibility(View.GONE);
-                end.setVisibility(View.VISIBLE);
-
-                TextView score = v.findViewById(R.id.test_end_score);
-                score.setText(String.valueOf(userScore));
-                user.setScore(userScore);
-            } else {
-                System.out.println("Score: " + userScore + "\n");
-                iArray.add(questionNum);
-                setupQuestionTitle(v, currentQuestion);
-                setupQuestion(v);
-            }
-        });
+    private void printUser(User user) {
+        System.out.println(sharedPrefs.contains(user.getUserName()) + "Score: " + sharedPrefs.getInt(user.getUserName(), -1));
     }
 
     @Override
@@ -219,54 +78,158 @@ public class TestFragment extends Fragment {
         binding = null;
     }
 
-    private User createUser(View v, View welcome, View test) {
-        EditText nameInput = v.findViewById(R.id.user_name_input);
-        String name = nameInput.getText().toString();
-
-        System.out.println("Name: " + name);
-        User tempUser = new User();
-        boolean done = false;
-        while (!done) {
-            // Check for user input
-            if
-                // Toast warning to user if input is blank
-            (name.compareTo("") == 0) {
-                Toast toast = new Toast(v.getContext());
-                toast.setText("Please enter a name");
-                toast.show();
-                break;
-            } else {
-                if (sharedPrefs.getAll() != null) {
-                    if (UserDataManager.checkForUser(name, v)) {
-                        tempUser = UserDataManager.loadUserData(name, v);
-                        Toast toast = new Toast(v.getContext());
-                        toast.setText("Loading user information");
-                        toast.show();
-                        welcome.setVisibility(View.GONE);
-                        test.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                    tempUser = new User(name, 0);
-                    UserDataManager.saveUserData(name, 0, v);
-                    Toast toast = new Toast(v.getContext());
-                    toast.setText("Creating User");
-                    toast.show();
-                    welcome.setVisibility(View.GONE);
-                    test.setVisibility(View.VISIBLE);
-                }
-                done = true;
-
+    private User getUser() {
+        String userName = getUserName();
+        if (userName.compareTo("") != 0) {
+            try {
+                int score = sharedPrefs.getInt(userName, -1);
+                user = new User(userName, score);
+            } catch (Exception e) {
+                user = new User(userName, 0);
             }
+            if (user.getScore() == -1) {
+                user = new User(userName, 0);
+            }
+            saveUser(user);
+            printUser(user);
+            setupTest();
         }
-
-        return tempUser;
+        else {
+            Toast toast = new Toast(this.getContext());
+            toast.setText("Please enter your name");
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.show();
+        }
+        return user;
     }
 
-    private int getCheckedAnswer(View v) {
-        RadioGroup answers = v.findViewById(R.id.answers);
-        RadioButton selected = v.findViewById(answers.getCheckedRadioButtonId());
+    private void setupTest() {
+        test = new Test(9);
+        setViews(0);
+        setQuestion();
+        startTest();
+    }
+
+    private void startTest() {
+        Button submitButton = root.findViewById(R.id.submit_answer_button);
+        submitButton.setOnClickListener(e -> {
+            if (test.getTestLength() > 0) {
+                checkSubmission(current);
+                setQuestion();
+            }
+            else {
+                endTest();
+            }
+        });
+    }
+
+    private void endTest() {
+        setViews(1);
+        saveUser(user);
+    }
+
+    private void setQuestion() {
+        TextView title = root.findViewById(R.id.question_title);
+        current = test.getQuestion();
+        title.setText("Question " + current.getQuestionNumber());
+        Integer image = current.getImage();
+        setImage(image);
+        for (int i = 0; i < 4; i++) {
+            setAnswer(i, current.getAnswer(i));
+        }
+    }
+
+    private void checkSubmission(Question current) {
+        int answer = getCheckedAnswer();
+        int correct = current.getCorrectAnswer();
+        System.out.println("Chosen: " + answer + " | " + "Correct: " + correct);
+        if (answer == correct) {
+            userScore++;
+            user.setScore(userScore);
+        }
+    }
+
+
+    private String getUserName() {
+        EditText nameInput = root.findViewById(R.id.user_name_input);
+        String name = null;
+        try {
+            name = nameInput.getText().toString();
+        }
+        catch (Exception e) {
+            System.out.println("No user name");
+        }
+        return name;
+    }
+
+    private int getCheckedAnswer() {
+        RadioGroup answers = root.findViewById(R.id.answers);
+        RadioButton selected = root.findViewById(answers.getCheckedRadioButtonId());
         selected.setChecked(false);
         return answers.indexOfChild(selected);
 
     }
+
+    private void setImage(Integer view) {
+        ImageView image = root.findViewById(R.id.question_image);
+        image.setImageResource(view);
+    }
+
+    private void setAnswer(int i, Integer view) {
+
+        RadioButton currAns;
+        switch (i) {
+            case 0:
+                currAns = root.findViewById(R.id.answer_one);
+                break;
+            case 1:
+                currAns = root.findViewById(R.id.answer_two);
+                break;
+            case 2:
+                currAns = root.findViewById(R.id.answer_three);
+                break;
+            default:
+                currAns = root.findViewById(R.id.answer_four);
+                break;
+        }
+        currAns.setText(view);
+    }
+
+    private void setViews(int i) {
+
+        ConstraintLayout begin = root.findViewById(R.id.welcome_layout);
+        ConstraintLayout testLayout = root.findViewById(R.id.question_layout);
+        ConstraintLayout testEnd = root.findViewById(R.id.test_end);
+        TextView score = root.findViewById(R.id.test_end_score);
+
+        switch (i) {
+            case 0:
+                begin.setVisibility(View.GONE);
+                testLayout.setVisibility(View.VISIBLE);
+                testEnd.setVisibility(View.GONE);
+                break;
+            case 1:
+                begin.setVisibility(View.GONE);
+                testLayout.setVisibility(View.GONE);
+                testEnd.setVisibility(View.VISIBLE);
+                score.setText(String.valueOf(userScore));
+                break;
+            case 3:
+                begin.setVisibility(View.VISIBLE);
+                testLayout.setVisibility(View.GONE);
+                testEnd.setVisibility(View.GONE);
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void saveUser(User user) {
+        SharedPreferences.Editor prefsEdit = sharedPrefs.edit();
+        prefsEdit.putInt(user.getUserName(), userScore);
+        prefsEdit.apply();
+        System.out.println(sharedPrefs.getInt(user.getUserName(), -1));
+    }
+
+
 }

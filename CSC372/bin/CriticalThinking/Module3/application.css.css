@@ -1,0 +1,16 @@
+.button {
+	-fx-hgap: 5px;
+
+    -fx-background-color: #2969c0;
+    -fx-background-radius: 10px;
+
+    -fx-border-radius:10px;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 1, 1);
+}
+
+.textArea {
+	-fx-font-alignment: center;
+	-fx-font-family: Helvetica;
+}

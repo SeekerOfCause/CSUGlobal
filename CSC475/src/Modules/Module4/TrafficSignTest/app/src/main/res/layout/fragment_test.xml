@@ -22,7 +22,6 @@
             android:layout_width="243dp"
             android:layout_height="35dp"
             android:gravity="center"
-            android:text="Question Title"
             android:textAppearance="@style/Theme.TrafficSignTest.NoActionBar"
             android:textColor="@color/md_theme_light_onPrimaryContainer"
             android:textSize="20sp"
@@ -96,7 +95,7 @@
         android:id="@+id/welcome_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible" >
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/text_gallery"
@@ -129,8 +128,10 @@
             android:id="@+id/user_name_input"
             android:layout_width="326dp"
             android:layout_height="50dp"
+            android:backgroundTint="@color/md_theme_light_outline"
+            android:backgroundTintMode="add"
             android:ems="10"
-            android:inputType="text"
+            android:inputType="text|textCapWords"
             android:textColor="@color/md_theme_light_onPrimaryContainer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -156,7 +157,7 @@
         android:id="@+id/test_end"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -178,19 +179,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.266" />
-
-        <TextView
-            android:id="@+id/end_text"
-            android:layout_width="255dp"
-            android:layout_height="166dp"
-            android:layout_marginTop="60dp"
-            android:text="@string/test_end_inst"
-            android:textAlignment="center"
-            android:textColor="@color/md_theme_light_onPrimaryContainer"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/test_end_score" />
 
         <TextView
             android:id="@+id/end_score_title"

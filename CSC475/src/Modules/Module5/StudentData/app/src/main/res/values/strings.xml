@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Student Data</string>
+    <string name="first_name_input_title">Student\'s First Name:</string>
+    <string name="first_name_input_hint">Enter the Student\'s First Name</string>
+    <string name="last_name_input_title">Student\'s Last Name:</string>
+    <string name="last_name_input_hint">Enter the Students\'s Last Name</string>
+    <string name="grade_input_title">Student\'s Grad:</string>
+    <string name="grade_input_hint">Enter the Student\'s Grade</string>
+    <string name="id_input_title">Student\'s ID:</string>
+    <string name="id_input_hint">Enter the Student\'s ID</string>
+    <string name="add_data_button">Add Data</string>
+    <string name="view_all_button">View All</string>
+    <string name="update_button">Update</string>
+    <string name="delete_button">Delete</string>
+</resources>

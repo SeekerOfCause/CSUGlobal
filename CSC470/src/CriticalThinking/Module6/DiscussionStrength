@@ -1,0 +1,35 @@
+@startuml UserLoginAndDashboardAccess
+
+actor User as u
+participant "Web Browser" as wb
+participant "Web Application Server" as was
+database "Database" as db
+
+u -> wb: Open Web Browser and Enter URL
+activate wb
+wb -> was: Send HTTP Request for Login Page
+activate was
+was --> wb: Send HTML Login Page
+deactivate was
+wb -> u: Display Login Page
+activate was
+u -> wb: Enter Username and Password
+wb -> was: Send HTTP Request with Credentials
+activate db
+was -> db: Validate Credentials
+deactivate db
+was --> wb: Send Login Response
+deactivate was
+wb -> u: Redirect to Dashboard Page
+wb -> was: Send HTTP Request for Dashboard Page
+activate was
+activate db
+was -> db: Fetch Data for Dashboard
+deactivate db
+was --> wb: Send Dashboard Page
+deactivate was
+wb -> u: Display Dashboard
+deactivate wb
+
+@enduml
+

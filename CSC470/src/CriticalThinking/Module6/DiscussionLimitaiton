@@ -1,0 +1,26 @@
+@startuml OnlineShoppingSystem
+
+actor User as u
+participant "ShoppingCart" as cart
+participant "Product" as product
+
+u -> cart: Initialize cart object
+activate cart
+cart --> u: Return cart object
+
+u -> cart: Add product to cart
+activate product
+cart --> product: Get product
+product --> cart: Add product
+deactivate product
+u -> cart: Update product quanity
+cart --> cart: Update ShoppingCart (Calculate total)
+u -> cart: Checkout
+cart --> cart: calcualte total
+cart -> u: Request payment
+u -> cart: Submit payment
+cart --> cart: verify payment and calcualte shipping time
+cart -> u: Display receipt
+deactivate cart
+
+@enduml

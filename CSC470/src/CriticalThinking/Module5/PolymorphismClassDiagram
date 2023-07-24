@@ -1,0 +1,52 @@
+@startuml
+class Vehicle {
+    +inGarage: boolean
+    +currentSpeed: int
+    +move(): void
+}
+
+class Car {
+    +inGarage: boolean
+    +isOn: boolean
+    +gasLevel: int
+    +currentSpeed: int
+    +turnOn(): void
+    +turnOff(): void
+    +move(): int newGasLevel
+    +pressBrakes(int newSpeed): void
+    +pressAccelerator(int newSpeed): void
+}
+
+class Motorcycle {
+    +inGarage: boolean
+    +isOn: boolean
+    +gasLevel: int
+    +currentSpeed: int
+    +currentGear: int
+    +turnOn(): void
+    +turnOff(): void
+    +move(): int newGasLevel
+    +useHandBrake(int newSpeed): void
+    +useThrottel(int newSpeed): void
+    +changeGear(int newGear): void
+}
+
+class Garage {
+    -vehicles: List<Vehicle>
+    +isOpen: boolean
+    +openGarage(): void
+    +addVehicle(vehicle: Vehicle): void
+}
+
+class Bicycle {
+	+inGarage: boolean
+    +currentSpeed: int
+    +move(): void
+}
+
+Vehicle <|-- Car
+Vehicle <|-- Motorcycle
+Vehicle <|-- Bicycle
+
+Garage o-- "1 to many" Vehicle
+@enduml

@@ -3,176 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:theme="@style/Theme.Material3.Light.NoActionBar">
 
-    <TextView
-        android:id="@+id/student_data_title"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/student_info_recycle_view"
         android:layout_width="0dp"
-        android:layout_height="53dp"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="78dp"
+        android:background="@color/md_theme_light_outlineVariant"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/first_name_title"
-        android:layout_width="wrap_content"
-        android:layout_height="32sp"
-        android:layout_marginTop="24dp"
-        android:text="@string/first_name_input_title"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/student_data_title" />
 
-    <EditText
-        android:id="@+id/first_name_input"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="56dp"
-        android:ems="10"
-        android:hint="@string/first_name_input_hint"
-        android:inputType="text"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/first_name_title"
-        app:layout_constraintTop_toBottomOf="@+id/first_name_title" />
+        <ImageButton
+            android:id="@+id/view_all_option"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".20"
+            android:background="@color/md_theme_light_outlineVariant"
+            android:padding="20dp"
+            android:tooltipText="@string/view_all_button"
+            app:srcCompat="@drawable/ic_viewall_icon" />
 
-    <TextView
-        android:id="@+id/last_name_title"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/last_name_input_title"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/first_name_input"
-        app:layout_constraintTop_toBottomOf="@+id/first_name_input" />
+        <ImageButton
+            android:id="@+id/search_option"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".20"
+            android:background="@color/md_theme_light_outlineVariant"
+            android:padding="14dp"
+            app:srcCompat="@drawable/ic_search_icon" />
 
-    <EditText
-        android:id="@+id/last_name_input"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/last_name_input_hint"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/last_name_title"
-        app:layout_constraintTop_toBottomOf="@+id/last_name_title" />
+        <ImageButton
+            android:id="@+id/update_option"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".20"
+            android:background="@color/md_theme_light_outlineVariant"
+            android:padding="10dp"
+            app:srcCompat="@drawable/ic_update_icon" />
 
-    <TextView
-        android:id="@+id/grade_input_title"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/grade_input_title"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/last_name_input"
-        app:layout_constraintTop_toBottomOf="@+id/last_name_input" />
+        <ImageButton
+            android:id="@+id/add_option"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".20"
+            android:background="@color/md_theme_light_outlineVariant"
+            android:padding="20dp"
+            app:srcCompat="@drawable/ic_add_icon" />
 
-    <EditText
-        android:id="@+id/grade_input_entry"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/grade_input_hint"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/grade_input_title"
-        app:layout_constraintTop_toBottomOf="@+id/grade_input_title" />
-
-    <TextView
-        android:id="@+id/student_id_title"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/id_input_title"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/grade_input_entry"
-        app:layout_constraintTop_toBottomOf="@+id/grade_input_entry" />
-
-    <EditText
-        android:id="@+id/id_input_entry"
-        android:layout_width="320dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="@string/id_input_hint"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/student_id_title"
-        app:layout_constraintTop_toBottomOf="@+id/student_id_title" />
-
-    <Button
-        android:id="@+id/add_data_button"
-        android:layout_width="120dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/add_data_button"
-        app:layout_constraintStart_toStartOf="@+id/id_input_entry"
-        app:layout_constraintTop_toBottomOf="@+id/id_input_entry" />
-
-    <Button
-        android:id="@+id/view_all_button"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="@string/view_all_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toEndOf="@+id/add_data_button"
-        app:layout_constraintTop_toTopOf="@+id/add_data_button" />
-
-    <Button
-        android:id="@+id/update_button"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/update_button"
-        app:layout_constraintStart_toStartOf="@+id/add_data_button"
-        app:layout_constraintTop_toBottomOf="@+id/add_data_button" />
-
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/delete_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toEndOf="@+id/update_button"
-        app:layout_constraintTop_toBottomOf="@+id/view_all_button" />
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="238dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_button"
-        app:layout_constraintVertical_bias="0.0">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/student_info_recycle_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+        <ImageButton
+            android:id="@+id/delete_option"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".20"
+            android:background="@color/md_theme_light_outlineVariant"
+            android:padding="20dp"
+            app:srcCompat="@drawable/ic_delete_icon" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

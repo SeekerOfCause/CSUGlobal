@@ -25,7 +25,7 @@ public class StudentDataContract {
 
     }
 
-    public static final String SQL_CREATE_TABLE = "CREATE TABLE " + StudentDataEntry.TABLE_NAME + " (" +
+    public static final String SQL_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + StudentDataEntry.TABLE_NAME + " (" +
             StudentDataEntry._ID + " INTEGER PRIMARY KEY," +
             StudentDataEntry.COLUMN_FIRST_NAME + " TEXT," +
             StudentDataEntry.COLUMN_LAST_NAME + " TEXT," +
@@ -42,147 +42,210 @@ public class StudentDataContract {
 
         public StudentDataHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            SQLiteDatabase db = this.getWritableDatabase();
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
+
             db.execSQL(SQL_CREATE_TABLE);
         }
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL(SQL_DELETE_ENTRIES);
-            onCreate(db);
         }
 
         public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             onUpgrade(db, oldVersion, newVersion);
         }
-    }
 
-    public void write(Context context, Student student) {
-        StudentDataHelper dbHelper = new StudentDataHelper(context);
+        public void write(Student student) {
 
-        String firstName = student.getFirstName();
-        String lastName = student.getLastName();
-        double grade = student.getGrade();
-        int id = student.getId();
 
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues cv = new ContentValues();
-        cv.put(StudentDataEntry.COLUMN_FIRST_NAME, firstName);
-        cv.put(StudentDataEntry.COLUMN_LAST_NAME, lastName);
-        cv.put(StudentDataEntry.COLUMN_GRADE, grade);
-        cv.put(StudentDataEntry.COLUMN_ID, id);
-        db.insert(StudentDataEntry.TABLE_NAME, null, cv);
-    }
+            String firstName = student.getFirstName();
+            String lastName = student.getLastName();
+            double grade = student.getGrade();
+            int id = student.getId();
 
-    public Student read(Context context, String firstName, String lastName) {
 
-        Student student = null;
-
-        SQLiteDatabase db = new StudentDataHelper(context).getReadableDatabase();
-
-        String[] projection = {
-                BaseColumns._ID,
-                StudentDataEntry.COLUMN_LAST_NAME,
-                StudentDataEntry.COLUMN_FIRST_NAME,
-                StudentDataEntry.COLUMN_GRADE,
-                StudentDataEntry.COLUMN_ID,
-        };
-
-        String selection = StudentDataEntry.COLUMN_FIRST_NAME + " = ? AND " +
-                StudentDataEntry.COLUMN_LAST_NAME + " = ?";
-        String[] selectionArgs = {firstName, lastName};
-
-        Cursor cursor = db.query(
-                StudentDataEntry.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null
-        );
-
-        if (cursor != null && cursor.moveToFirst()) {
-            // Extract the data from the cursor and create a Student object
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_ID));
-            double grade = cursor.getDouble(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_GRADE));
-
-            // Assuming your Student class has a constructor that takes firstName, lastName, grade, and id as parameters
-            student = new Student(firstName, lastName, grade, id);
-
-            cursor.close();
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues cv = new ContentValues();
+            cv.put(StudentDataEntry.COLUMN_FIRST_NAME, firstName);
+            cv.put(StudentDataEntry.COLUMN_LAST_NAME, lastName);
+            cv.put(StudentDataEntry.COLUMN_GRADE, grade);
+            cv.put(StudentDataEntry.COLUMN_ID, id);
+            db.insert(StudentDataEntry.TABLE_NAME, null, cv);
+            db.close();
         }
 
-        return student;
-    }
 
-    public ArrayList<Student> readAll(Context context) {
-        StudentDataHelper dbHelper = new StudentDataHelper(context);
+        public Student read(String firstName, String lastName) {
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Student student = null;
 
-        String[] projection = {
-                BaseColumns._ID,
-                StudentDataEntry.COLUMN_LAST_NAME,
-                StudentDataEntry.COLUMN_FIRST_NAME,
-                StudentDataEntry.COLUMN_GRADE,
-                StudentDataEntry.COLUMN_ID,
-        };
+            SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(
-                StudentDataEntry.TABLE_NAME,
-                projection,
-                null, // No selection, so it retrieves all rows
-                null,
-                null,
-                null,
-                null
-        );
+            String[] projection = {
+                    BaseColumns._ID,
+                    StudentDataEntry.COLUMN_LAST_NAME,
+                    StudentDataEntry.COLUMN_FIRST_NAME,
+                    StudentDataEntry.COLUMN_GRADE,
+                    StudentDataEntry.COLUMN_ID,
+            };
 
-        ArrayList<Student> studentList = new ArrayList<>();
+            String selection = StudentDataEntry.COLUMN_FIRST_NAME + " = ? AND " +
+                    StudentDataEntry.COLUMN_LAST_NAME + " = ?";
+            String[] selectionArgs = {firstName, lastName};
 
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                // Extract the data from the cursor for each row and create a Student object
+            Cursor cursor = db.query(
+                    StudentDataEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null
+            );
+
+            if (cursor != null && cursor.moveToFirst()) {
+                // Extract the data from the cursor and create a Student object
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_ID));
+                double grade = cursor.getDouble(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_GRADE));
+
+                // Assuming your Student class has a constructor that takes firstName, lastName, grade, and id as parameters
+                student = new Student(firstName, lastName, grade, id);
+
+                cursor.close();
+            }
+            db.close();
+            return student;
+        }
+
+        public Student read(int id) {
+
+            Student student = null;
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String[] projection = {
+                    BaseColumns._ID,
+                    StudentDataEntry.COLUMN_LAST_NAME,
+                    StudentDataEntry.COLUMN_FIRST_NAME,
+                    StudentDataEntry.COLUMN_GRADE,
+                    StudentDataEntry.COLUMN_ID,
+            };
+
+            String selection = StudentDataEntry.COLUMN_ID + " = ?";
+            String[] selectionArgs = {String.valueOf(id)};
+
+            Cursor cursor = db.query(
+                    StudentDataEntry.TABLE_NAME,
+                    projection,
+                    selection,
+                    selectionArgs,
+                    null,
+                    null,
+                    null
+            );
+
+            if (cursor != null && cursor.moveToFirst()) {
+                // Extract the data from the cursor and create a Student object
                 String firstName = cursor.getString(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_FIRST_NAME));
                 String lastName = cursor.getString(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_LAST_NAME));
                 double grade = cursor.getDouble(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_GRADE));
-                int id = cursor.getInt(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_ID));
 
                 // Assuming your Student class has a constructor that takes firstName, lastName, grade, and id as parameters
-                Student student = new Student(firstName, lastName, grade, id);
+                student = new Student(firstName, lastName, grade, id);
 
-                studentList.add(student);
-            } while (cursor.moveToNext());
-
-            cursor.close();
+                cursor.close();
+                db.close();
+            }
+            return student;
         }
 
-        return studentList;
+        public ArrayList<Student> readAll() {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String[] projection = {
+                    BaseColumns._ID,
+                    StudentDataEntry.COLUMN_LAST_NAME,
+                    StudentDataEntry.COLUMN_FIRST_NAME,
+                    StudentDataEntry.COLUMN_GRADE,
+                    StudentDataEntry.COLUMN_ID,
+            };
+
+            Cursor cursor = db.query(
+                    StudentDataEntry.TABLE_NAME,
+                    projection,
+                    null, // No selection, so it retrieves all rows
+                    null,
+                    null,
+                    null,
+                    null
+            );
+
+            ArrayList<Student> studentList = new ArrayList<>();
+
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    // Extract the data from the cursor for each row and create a Student object
+                    String firstName = cursor.getString(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_FIRST_NAME));
+                    String lastName = cursor.getString(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_LAST_NAME));
+                    double grade = cursor.getDouble(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_GRADE));
+                    int id = cursor.getInt(cursor.getColumnIndexOrThrow(StudentDataEntry.COLUMN_ID));
+
+                    System.out.println("READALL - Name: " + firstName + " " + lastName + " | Grade: " + grade + " | ID: " + id);
+
+                    // Assuming your Student class has a constructor that takes firstName, lastName, grade, and id as parameters
+                    Student student = new Student(firstName, lastName, grade, id);
+
+                    studentList.add(student);
+                } while (cursor.moveToNext());
+
+                cursor.close();
+                db.close();
+            }
+            return studentList;
+        }
+
+        public void deleteStudentByName(Context context, String firstName, String lastName) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String selection = StudentDataEntry.COLUMN_FIRST_NAME + " = ? AND " +
+                    StudentDataEntry.COLUMN_LAST_NAME + " = ?";
+            String[] selectionArgs = {firstName, lastName};
+
+            db.delete(StudentDataEntry.TABLE_NAME, selection, selectionArgs);
+            db.close();
+        }
+
+        public void deleteStudentById(Context context, int id) {
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            String selection = StudentDataEntry.COLUMN_ID + " = ?";
+            String[] selectionArgs = {String.valueOf(id)};
+
+            db.delete(StudentDataEntry.TABLE_NAME, selection, selectionArgs);
+            db.close();
+        }
+
+        public int databaseSize() {
+            SQLiteDatabase db = this.getReadableDatabase();
+            String countQuery = "SELECT COUNT(*) FROM " + StudentDataEntry.TABLE_NAME;
+            Cursor cursor = db.rawQuery(countQuery, null);
+            int count = 0;
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    count = cursor.getInt(0);
+                }
+                cursor.close();
+                db.close();
+            }
+            return count;
+        }
     }
 
-    public void deleteStudentByName(Context context, String firstName, String lastName) {
-        StudentDataHelper dbHelper = new StudentDataHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        String selection = StudentDataEntry.COLUMN_FIRST_NAME + " = ? AND " +
-                StudentDataEntry.COLUMN_LAST_NAME + " = ?";
-        String[] selectionArgs = {firstName, lastName};
-
-        db.delete(StudentDataEntry.TABLE_NAME, selection, selectionArgs);
-    }
-
-    public void deleteStudentById(Context context, int id) {
-        StudentDataHelper dbHelper = new StudentDataHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        String selection = StudentDataEntry.COLUMN_ID + " = ?";
-        String[] selectionArgs = {String.valueOf(id)};
-
-        db.delete(StudentDataEntry.TABLE_NAME, selection, selectionArgs);
-    }
 
 }

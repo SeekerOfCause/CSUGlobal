@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Student Data</string>
+    <string name="app_name">StudentData</string>
+    <string name="current_students">Current Students</string>
+    <string name="edit_student_title">Edit Student Data</string>
+    <string name="add_student_title">Add a Student</string>
     <string name="first_name_input_title">Student\'s First Name:</string>
     <string name="first_name_input_hint">Enter the Student\'s First Name</string>
     <string name="last_name_input_title">Student\'s Last Name:</string>
@@ -8,8 +11,23 @@
     <string name="grade_input_hint">Enter the Student\'s Grade</string>
     <string name="id_input_title">Student\'s ID:</string>
     <string name="id_input_hint">Enter the Student\'s ID</string>
-    <string name="add_data_button">Add Data</string>
-    <string name="view_all_button">View All</string>
-    <string name="update_button">Update</string>
-    <string name="delete_button">Delete</string>
+    <string name="search">Search</string>
+    <string name="search_initial">Enter the students information</string>
+    <string name="update">Update</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="add_data_button">Add Student</string>
+    <string name="view_all_button">View All Students</string>
+    <string name="search_button">Search for Student</string>
+    <string name="update_button">Update Student</string>
+    <string name="delete_button">Delete Student</string>
+    <string name="submit_button">Submit</string>
+    <string name="or">or</string>
+    <string name="student_added">Add student?</string>
+    <string name="student_delete">Delete Student?</string>
+    <string name="confirm_delete">DELETE</string>
+    <string name="confirm_add">ADD</string>
+    <string name="confirm_update">UPDATE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="student_update">Update Student?</string>
 </resources>

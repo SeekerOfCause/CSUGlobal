@@ -29,16 +29,6 @@
 
 
         <ImageButton
-            android:id="@+id/view_all_option"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight=".20"
-            android:background="@color/md_theme_light_outlineVariant"
-            android:padding="20dp"
-            android:tooltipText="@string/view_all_button"
-            app:srcCompat="@drawable/ic_viewall_icon" />
-
-        <ImageButton
             android:id="@+id/search_option"
             android:layout_width="0dp"
             android:layout_height="match_parent"

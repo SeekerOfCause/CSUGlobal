@@ -52,12 +52,10 @@ public class MainActivity extends AppCompatActivity {
         ImageButton deleteStudent = findViewById(R.id.delete_option);
         ImageButton addStudent = findViewById(R.id.add_option);
         ImageButton searchStudent = findViewById(R.id.search_option);
-        ImageButton viewAllStudents = findViewById(R.id.view_all_option);
         ImageButton updateStudent = findViewById(R.id.update_option);
         deleteStudent.setOnClickListener(e -> showModal(0));
         addStudent.setOnClickListener(e -> showModal(1));
         searchStudent.setOnClickListener(e -> showModal(2));
-        viewAllStudents.setOnClickListener(e -> clearFilters());
         updateStudent.setOnClickListener(e -> showModal(3));
 
 
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private void clearFilters() {
     }
 
-    public void showModal(int i) {
+    private void showModal(int i) {
         // Inflate the layout for the delete modal
         view = getLayoutInflater().inflate(R.layout.cardview_options, null);
 
@@ -103,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         switch (i) {
             case (0):
                 //delete
-                title.setText(R.string.search_initial);
+                title.setText(R.string.delete);
                 gradeTitle.setText(R.string.or);
                 grade.setVisibility(View.INVISIBLE);
                 break;
@@ -113,16 +111,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case (2):
                 //search
-                title.setText(R.string.search_initial);
-                gradeTitle.setVisibility(View.INVISIBLE);
+                title.setText(R.string.search);
+                gradeTitle.setText(R.string.or);
                 grade.setVisibility(View.INVISIBLE);
-                idTitle.setVisibility(View.INVISIBLE);
-                id.setVisibility(View.INVISIBLE);
-
                 break;
             case (3):
                 //update
-                title.setText(R.string.search_initial);
+                title.setText(R.string.update);
                 gradeTitle.setText(R.string.or);
                 grade.setVisibility(View.INVISIBLE);
                 break;
@@ -155,8 +150,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteStudent(View view) {
-        System.out.println("Delete begin");
-
         StudentDataContract.StudentDataHelper dbHelper = new StudentDataContract.StudentDataHelper(view.getRootView().getContext());
         Student student = null;
 
@@ -171,10 +164,9 @@ public class MainActivity extends AppCompatActivity {
             delete.setOnClickListener(e -> {
                 new AlertDialog.Builder(view.getContext()).setMessage(R.string.student_delete).setPositiveButton(getString(R.string.confirm_delete), (dialog, which) -> {
                     dbHelper.deleteStudentByName(this, finalStudent.getFirstName(), finalStudent.getLastName());
-                    System.out.println("confirm");
+                    toastIt("Student Deleted");
                     alertDialog.dismiss();
                 }).setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
-                    System.out.println("cancel");
                 }).create().show();
             });
         }
@@ -190,7 +182,6 @@ public class MainActivity extends AppCompatActivity {
 
         if ((TextUtils.isEmpty(firstName.getText().toString()) || TextUtils.isEmpty(lastName.getText().toString())) && TextUtils.isEmpty(idInput.getText().toString())) {
             toastIt("Please enter search parameters...");
-            System.out.println("empty fields");
         } else {
             if (TextUtils.isEmpty(firstName.getText().toString()) || TextUtils.isEmpty(lastName.getText().toString())) {
                 ;
@@ -200,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     toastIt("Please check your input");
                 }
-                System.out.println("empty names");
             } else {
                 first = firstName.getText().toString();
                 last = lastName.getText().toString();
@@ -209,10 +199,9 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception p) {
                     toastIt("Please check your input");
                 }
-                System.out.println("empty id");
             }
             if (student == null) {
-                toastIt("Please check your input");
+                toastIt("Please enter required input");
             }
         }
         return student;
@@ -224,32 +213,106 @@ public class MainActivity extends AppCompatActivity {
         EditText lastName = view.findViewById(R.id.last_name_input);
         EditText idInput = view.findViewById(R.id.id_input_entry);
         EditText gradeInput = view.findViewById(R.id.grade_input_entry);
+        boolean hasInputs = true;
+        EditText[] inputs = {firstName, lastName, idInput, gradeInput};
 
-        Button add = view.findViewById(R.id.return_button);
-        Student student = new Student(
-                firstName.getText().toString(),
-                lastName.getText().toString(),
-                Double.valueOf(gradeInput.getText().toString()),
-                Integer.parseInt(idInput.getText().toString())
-        );
+        for (int i = 0; i < 4; i++) {
+            if (TextUtils.isEmpty(inputs[i].getText().toString())) {
+                hasInputs = false;
+            }
+        }
 
-        setReturn(student);
-        add.setOnClickListener(e -> {
-            new AlertDialog.Builder(view.getContext()).setMessage(R.string.student_added).setPositiveButton(getString(R.string.confirm_add), (dialog, which) -> {
-                dbHelper.write(student);
-                toastIt("Student Added");
-                alertDialog.dismiss();
-            }).setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
-            }).create().show();
-        });
+        if (!hasInputs) {
+            toastIt("Please enter all information");
+        } else {
+            Button add = view.findViewById(R.id.return_button);
+            add.setText(getString(R.string.add));
+
+            Student student = new Student(firstName.getText().toString(), lastName.getText().toString(), Double.parseDouble(gradeInput.getText().toString()), Integer.parseInt(idInput.getText().toString()));
+
+            setReturn(student);
+
+            add.setOnClickListener(e -> {
+                new AlertDialog.Builder(view.getContext()).setMessage(R.string.student_added).setPositiveButton(getString(R.string.confirm_add), (dialog, which) -> {
+                    boolean added = dbHelper.addStudent(student);
+                    if (added) {
+                        toastIt("Student Added");
+                        alertDialog.dismiss();
+                    } else {
+                        switchSearchReturn(view, 0);
+                        toastIt("Unable to add student, please check their information");
+                    }
+                }).setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
+                }).create().show();
+            });
+        }
 
     }
 
     private void searchStudent(View view) {
 
+        Button close = view.findViewById(R.id.return_button);
+        close.setText("Close");
+
+        Student student = getStudent();
+
+        if (student != null) {
+            setReturn(student);
+            close.setOnClickListener(e -> alertDialog.dismiss());
+        }
     }
 
     private void updateStudent(View view) {
+
+        Button find = view.findViewById(R.id.return_button);
+        find.setText("Update this Student");
+
+        Student student = getStudent();
+
+        if (student != null) {
+            setReturn(student);
+            find.setOnClickListener(e -> submitUpdate(view, student));
+        }
+
+    }
+
+    private void submitUpdate(View view, Student student) {
+        EditText firstName = view.findViewById(R.id.first_name_input);
+        EditText lastName = view.findViewById(R.id.last_name_input);
+        EditText idInput = view.findViewById(R.id.id_input_entry);
+        EditText gradeInput = view.findViewById(R.id.grade_input_entry);
+        TextView gradeTitle = view.findViewById(R.id.grade_input_title);
+        EditText grade = view.findViewById(R.id.grade_input_entry);
+
+        gradeTitle.setText(R.string.grade_input_title);
+        grade.setVisibility(View.VISIBLE);
+
+        firstName.setText(student.getFirstName());
+        lastName.setText(student.getLastName());
+        idInput.setText(String.valueOf(student.getId()));
+        gradeInput.setText(String.valueOf(student.getGrade()));
+
+        switchSearchReturn(view, 0);
+        Button submit = view.findViewById(R.id.submit_button);
+        submit.setText("Submit Update");
+        submit.setOnClickListener(e -> {
+            Student update = new Student(firstName.getText().toString(), lastName.getText().toString(), Double.parseDouble(gradeInput.getText().toString()), Integer.parseInt(idInput.getText().toString()));
+            new AlertDialog.Builder(view.getContext()).setMessage(R.string.confirm_update).setPositiveButton(getString(R.string.confirm_update), (dialog, which) -> {
+                boolean updated = dbHelper.updateStudent(update, student.getId());
+                if (updated) {
+                    toastIt("Student updated");
+                    alertDialog.dismiss();
+                } else {
+                    switchSearchReturn(view, 0);
+                    toastIt("Unable to update student information, please check their information");
+                }
+            }).setNegativeButton(getString(R.string.cancel), (dialog, which) -> {
+                firstName.setText(student.getFirstName());
+                lastName.setText(student.getLastName());
+                idInput.setText(String.valueOf(student.getId()));
+                gradeInput.setText(String.valueOf(student.getGrade()));
+            }).show();
+        });
 
     }
 

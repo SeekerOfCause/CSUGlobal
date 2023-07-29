@@ -1,0 +1,73 @@
+@startuml
+
+actor Patient as p
+participant "Appointment System" as AS
+participant Receptionist as r
+participant Doctor as d
+
+box "Hospital Management System"
+participant AS
+    participant r
+    participant d
+end box
+
+note right of p: Patient wants to book\nan appointment
+
+p -> AS: requestAppointment(doctorId, datetime)
+activate AS
+AS -> r: validateAvailability(doctorId, datetime)
+activate r
+
+note over r, d: Check Doctor's schedule
+r -> d: checkSchedule(datetime)
+activate d
+d --> r: confirmAvailability()
+deactivate d
+
+r --> AS: confirmBooking()
+deactivate r
+
+note over AS: Create appointment record
+AS -> AS: createRecord()
+AS --> p: returnConfirmation()
+deactivate AS
+destroy AS
+
+note right of p: Receives confirmation\nand prepares for visit
+
+AS -> AS ++ : triggerReminder()
+
+note over AS: Sends a reminder to patient
+
+AS -->> p: sendReminder()
+deactivate AS
+destroy AS
+
+p -> AS : checkAppointmentDetails()
+activate AS
+AS --> p: returnDetails()
+deactivate AS
+
+note right of p: Views appointment details
+
+destroy AS
+
+note over d, p: Appointment takes place
+p -> d: visit()
+activate d
+d --> p: provideTreatment()
+deactivate d
+destroy d
+
+p ->> AS: checkOut()
+activate AS
+AS --> r: verifyPatientCheckout()
+activate r
+r --> AS: closePatientAppointment()
+deactivate r
+destroy r
+AS --> p: checkoutComplete()
+deactivate AS
+destroy AS
+
+@enduml

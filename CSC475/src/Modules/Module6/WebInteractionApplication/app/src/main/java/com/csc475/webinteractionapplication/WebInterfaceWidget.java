@@ -3,9 +3,12 @@ package com.csc475.webinteractionapplication;
 
 import static android.provider.Settings.Secure.getString;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.appwidget.AppWidgetProviderInfo;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -21,11 +24,15 @@ public class WebInterfaceWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        Icon widget = Icon.createWithResource(context, R.mipmap.ic_widget_icon);
+        String url = "https://form.jotform.com/232098305355153";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        intent.setPackage("com.android.chrome");
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, appWidgetId, intent, PendingIntent.FLAG_IMMUTABLE);
+
         // Construct the RemoteViews object
         AppWidgetProviderInfo info = new AppWidgetProviderInfo();
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.web_interface_widget);
-        views.setOnClickResponse(views.getLayoutId(), RemoteViews.RemoteResponse.fromFillInIntent(new Intent(Intent.ACTION_VIEW, Uri.parse("https://form.jotform.com/232098305355153"))));
+        views.setOnClickPendingIntent(R.id.widget, pendingIntent);
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }

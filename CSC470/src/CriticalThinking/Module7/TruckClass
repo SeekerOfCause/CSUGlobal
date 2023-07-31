@@ -1,0 +1,10 @@
+@startuml
+
+class Truck {
+  +vehicleID : int
+  +color : String
+  +payloadWeightLimitLbs: int
+  +truckBedSizeSqFt: int
+}
+
+@enduml

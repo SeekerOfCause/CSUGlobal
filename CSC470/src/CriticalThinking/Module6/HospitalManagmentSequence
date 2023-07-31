@@ -31,7 +31,6 @@ note over AS: Create appointment record
 AS -> AS: createRecord()
 AS --> p: returnConfirmation()
 deactivate AS
-destroy AS
 
 note right of p: Receives confirmation\nand prepares for visit
 
@@ -41,7 +40,6 @@ note over AS: Sends a reminder to patient
 
 AS -->> p: sendReminder()
 deactivate AS
-destroy AS
 
 p -> AS : checkAppointmentDetails()
 activate AS
@@ -50,24 +48,20 @@ deactivate AS
 
 note right of p: Views appointment details
 
-destroy AS
 
 note over d, p: Appointment takes place
 p -> d: visit()
 activate d
 d --> p: provideTreatment()
 deactivate d
-destroy d
-
 p ->> AS: checkOut()
 activate AS
-AS --> r: verifyPatientCheckout()
+AS -> r: verifyPatientCheckout()
 activate r
 r --> AS: closePatientAppointment()
 deactivate r
-destroy r
-AS --> p: checkoutComplete()
+AS -> p: checkoutComplete()
 deactivate AS
 destroy AS
-
+destroy p
 @enduml

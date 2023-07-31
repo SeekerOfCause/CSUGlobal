@@ -1,0 +1,35 @@
+@startuml
+class Customer {
+  + customerID : String
+  --
+  name : String
+  email : String
+  customerID: string
+}
+
+class Order {
+  + orderID : String
+  --
+  date : Date
+  total : Number
+  customerID : String
+}
+
+class Product {
+  + productID : String
+  --
+  name : String
+  price : Number
+}
+
+class OrderDetail {
+  + orderID : String
+  + productID : String
+  --
+  quantity : Number
+}
+
+Customer "1" -- "0..*" Order : places
+Order "1" -- "*" OrderDetail : contains
+Product "1" -- "*" OrderDetail : included in
+@enduml

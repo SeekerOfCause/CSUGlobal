@@ -1,0 +1,15 @@
+@startuml
+
+class Driver {
+  +driverID : int
+  +name : String
+}
+class Car {
+  +vehicleID : int
+  +color : String
+  +make : String
+  +model : String
+}
+Driver "1" -- "N" Car
+
+@enduml

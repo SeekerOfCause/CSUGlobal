@@ -1,0 +1,10 @@
+@startuml
+
+class Car {
+  +vehicleID : int
+  +color : String
+  +make : String
+  +model : String
+}
+
+@enduml

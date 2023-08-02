@@ -1,10 +1,10 @@
 @startuml
 
-class Driver {
+class Driver<<table>> {
   +driverID : int
   +name : String
 }
-class Car {
+class Car<<table>> {
   +vehicleID : int
   +color : String
   +make : String

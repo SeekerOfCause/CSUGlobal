@@ -1,31 +1,24 @@
 @startuml
 
-abstract class Vehicle {
+abstract class Vehicle<<table>> {
   +vehicleID: int
   +color: String
 }
-class Car {
+class Car<<table>> {
+  +vehicleID : int
+  +color : String
   +make: String
   +model: String
 }
-class Truck {
+class Truck<<table>> {
+  +vehicleID : int
+  +color : String
   +payloadWeightLimitLbs: int
   +truckBedSizeSqFt: int
 }
 Car --|> Vehicle
 Truck --|> Vehicle
 
-class Driver {
-  +driverID : int
-  +name : String
-}
-class Car {
-  +vehicleID : int
-  +color : String
-  +make : String
-  +model : String
-}
-Driver "1" -- "N" Car
 
 @enduml
 

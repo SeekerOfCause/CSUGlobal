@@ -1,0 +1,16 @@
+@startuml
+[*] --> Inventory : System Starts
+Inventory --> CarArrived : New inventory
+Inventory: Current Vehicle Inventory
+CarArrived: New car arriving into inventory
+Inventory --> CarMaintenance: Maintenance needed
+CarMaintenance: Car unavailable due to maintennace
+CarArrived --> InventoryUpdate : Update Inventory
+Inventory --> CarSale : Sell Car
+CarSale: Car has been sold
+CarMaintenance --> InventoryUpdate: Car Unavailable
+CarMaintenance --> InventoryUpdate: Car Available
+CarSale --> InventoryUpdate : Update Inventory
+InventoryUpdate ----> Inventory : Update current inventory
+InventoryUpdate: Change to inventory
+@enduml

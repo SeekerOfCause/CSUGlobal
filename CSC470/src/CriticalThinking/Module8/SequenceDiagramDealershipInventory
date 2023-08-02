@@ -1,0 +1,35 @@
+@startuml
+actor User
+participant InventorySystem as IS
+participant MaintenanceSystem as MS
+participant SalesSystem as SS
+
+User -> IS: New inventory (CarArrived)
+activate IS
+IS -> IS: Update inventory (InventoryUpdate)
+deactivate IS
+
+User -> IS: Maintenance needed (CarMaintenance)
+activate IS
+IS -> MS: Request Maintenance
+activate MS
+MS --> IS: Car Unavailable
+IS -> IS: Update inventory (InventoryUpdate)
+deactivate MS
+deactivate IS
+MS --> IS: Car Available
+activate MS
+activate IS
+IS -> IS: Update inventory (InventoryUpdate)
+deactivate MS
+deactivate IS
+
+User -> IS: Sell Car (CarSale)
+activate IS
+IS -> SS: Request Sale
+activate SS
+SS --> IS: Car has been sold
+IS -> IS: Update inventory (InventoryUpdate)
+deactivate SS
+deactivate IS
+@enduml

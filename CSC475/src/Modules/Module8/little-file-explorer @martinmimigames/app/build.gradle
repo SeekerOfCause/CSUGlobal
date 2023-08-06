@@ -1,0 +1,35 @@
+plugins {
+  id 'com.android.application'
+}
+
+android {
+
+  compileSdk 33
+
+  defaultConfig {
+    applicationId "com.martinmimigames.simplefileexplorer"
+    minSdk 28
+    //noinspection ExpiredTargetSdkVersion
+    targetSdk 29
+  }
+
+  lint {
+    baseline = file("lint-baseline.xml")
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled true
+      shrinkResources true
+      crunchPngs false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+  namespace 'com.martinmimigames.simplefileexplorer'
+}

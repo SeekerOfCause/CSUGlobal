@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_upload">Upload</string>
     <string name="title_notifications">Notifications</string>
+    <string name="home_tooltip">Device files and their backup status</string>
+    <string name="download_tooltip">Files on the cloud that can be downloaded</string>
+    <string name="login_screen">Login to your Google Cloud account</string>
 </resources>

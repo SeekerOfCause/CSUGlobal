@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_download" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.csc475.myapplication.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_login"
+        android:name="com.csc475.myapplication.ui.notifications.LoginFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_login" />
 </navigation>

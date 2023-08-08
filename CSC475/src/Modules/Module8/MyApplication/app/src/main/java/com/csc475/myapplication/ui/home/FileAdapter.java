@@ -39,6 +39,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
         holder.nameTextView.setText(currentFile.getName());
         holder.typeTextView.setText(currentFile.getType());
         holder.sizeTextView.setText(currentFile.getSize());
+        holder.backedUpView.setText((currentFile.getBackedUp() ? "Backed Up" : "Not Backed up"));
     }
 
     @Override
@@ -51,12 +52,15 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.ViewHolder> {
         TextView typeTextView;
         TextView sizeTextView;
 
+        TextView backedUpView;
+
         public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
 
             nameTextView = itemView.findViewById(R.id.nameTextView);
             typeTextView = itemView.findViewById(R.id.typeTextView);
             sizeTextView = itemView.findViewById(R.id.sizeTextView);
+            backedUpView = itemView.findViewById(R.id.backupTextView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -32,6 +32,13 @@
             android:text="Size"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/backupTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Backed Up"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

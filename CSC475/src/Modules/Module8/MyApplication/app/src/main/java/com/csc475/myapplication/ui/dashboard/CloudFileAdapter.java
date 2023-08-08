@@ -15,16 +15,22 @@ import java.util.ArrayList;
 public class CloudFileAdapter extends RecyclerView.Adapter<CloudFileAdapter.ViewHolder> {
 
     private ArrayList<CloudFile> cloudFileData;
+    private OnItemClickListener mListener;
 
-    public CloudFileAdapter(ArrayList<CloudFile> cloudFileData) {
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public CloudFileAdapter(ArrayList<CloudFile> cloudFileData, OnItemClickListener listener) {
         this.cloudFileData = cloudFileData;
+        this.mListener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
-        return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout_cloud, parent, false);
+        return new ViewHolder(view, mListener);
     }
 
     @Override
@@ -33,27 +39,34 @@ public class CloudFileAdapter extends RecyclerView.Adapter<CloudFileAdapter.View
         holder.nameTextView.setText(currentFile.getName());
         holder.typeTextView.setText(currentFile.getType());
         holder.sizeTextView.setText(currentFile.getSize());
-
-        holder.itemView.setOnClickListener(v -> {
-            // TODO: Implement file download logic here
-        });
     }
 
     @Override
-    public int getItemCount() {
-        return cloudFileData.size();
-    }
+    public int getItemCount() { return cloudFileData.size(); }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView typeTextView;
         TextView sizeTextView;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnItemClickListener listener) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.nameTextView);
-            typeTextView = itemView.findViewById(R.id.typeTextView);
-            sizeTextView = itemView.findViewById(R.id.sizeTextView);
+
+            nameTextView = itemView.findViewById(R.id.nameTextViewCloud);
+            typeTextView = itemView.findViewById(R.id.typeTextViewCloud);
+            sizeTextView = itemView.findViewById(R.id.sizeTextViewCloud);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 }

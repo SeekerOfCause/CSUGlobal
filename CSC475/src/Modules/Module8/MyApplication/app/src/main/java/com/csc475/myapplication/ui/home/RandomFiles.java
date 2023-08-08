@@ -25,8 +25,19 @@ public class RandomFiles extends ArrayList<TestFile> {
         String fileType = fileTypes[random.nextInt(fileTypes.length)];
         // Random file size between 10KB and 1000KB
         String fileSize = (random.nextInt(991) + 10) + " KB";
+        boolean backedUp;
+        int randomUp = random.nextInt(2);
+        if (randomUp != 1) {
+            backedUp = false;
+        }
+        else if (randomUp != 0){
+            backedUp = true;
+        }
+        else {
+            backedUp = true;
+        }
         // Create new TestFile
-        TestFile file = new TestFile(fileName, fileType, fileSize);
+        TestFile file = new TestFile(fileName, fileType, fileSize, backedUp);
         System.out.println(file.toString());
         return file;
     }

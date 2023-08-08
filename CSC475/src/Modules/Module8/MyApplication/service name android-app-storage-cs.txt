@@ -1,5 +1,0 @@
-service name: android-app-storage-csc475@portfolio-site-1234567.iam.gserviceaccount.com
-
-access key: GOOG1EJE5NCXSZMCJDMN54FBO5GEOISDODQ7R53U7NS2Q3J3MEGCE5NWN3MTC
-
-secret: gRDXH4Y/KJ3lhmRJNIMU8bYLQdzt0XogHZ/DKjWl

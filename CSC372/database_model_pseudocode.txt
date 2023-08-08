@@ -1,0 +1,48 @@
+class Vehicle {
+    vehicleID: int
+    color: String
+}
+
+class Car extends Vehicle {
+    make: String
+    model: String
+}
+
+class Truck extends Vehicle {
+    payloadWeightLimitLbs: int
+    truckBedSizeSqFt: int
+}
+
+class Driver {
+    driverID: int
+    name: String
+}
+
+table VehicleTable {
+    vehicleID: int
+    color: String
+}
+
+table CarTable {
+    vehicleID: int
+    color: String
+    make: String
+    model: String
+}
+
+table TruckTable {
+    vehicleID: int
+    color: String
+    payloadWeightLimitLbs: int
+    truckBedSizeSqFt: int
+}
+
+table DriverTable {
+    driverID: int
+    name: String
+}
+
+table CarDriverAssociationTable {
+    vehicleID: int
+    driverID: int
+}
